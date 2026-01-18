@@ -1,5 +1,3 @@
-from blockkit.core import ColumnSettings
-from blockkit.core import RawText
 from datetime import date, datetime, time
 from zoneinfo import ZoneInfo
 
@@ -10,6 +8,7 @@ from blockkit.core import (
     Button,
     ChannelsSelect,
     Checkboxes,
+    ColumnSettings,
     ComponentValidationError,
     Confirm,
     Context,
@@ -29,7 +28,6 @@ from blockkit.core import (
     Image,
     ImageEl,
     Input,
-    Table,
     InputParameter,
     Markdown,
     Message,
@@ -45,6 +43,7 @@ from blockkit.core import (
     Overflow,
     PlainTextInput,
     RadioButtons,
+    RawText,
     RichBroadcastEl,
     RichChannelEl,
     RichColorEl,
@@ -64,6 +63,7 @@ from blockkit.core import (
     Section,
     SlackFile,
     StaticSelect,
+    Table,
     Text,
     TimePicker,
     Trigger,
@@ -386,7 +386,7 @@ class TestConversationFilter:
 
         got = (
             ConversationFilter()
-            .include(["public", "mpim"])
+            .include("public", "mpim")
             .exclude_bot_users()
             .exclude_external_shared_channels()
             .build()

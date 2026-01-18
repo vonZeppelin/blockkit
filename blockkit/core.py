@@ -920,7 +920,7 @@ class ConversationFilter(Component):
         exclude_external_shared_channels: bool | None = None,
     ):
         super().__init__()
-        self.include(include)
+        self.include(*include or ())
         self.exclude_bot_users(exclude_bot_users)
         self.exclude_external_shared_channels(exclude_external_shared_channels)
         self._add_validator(
@@ -929,12 +929,10 @@ class ConversationFilter(Component):
             )
         )
 
-    def include(
-        self, include: list[Literal["im", "mpim", "private", "public"]] | None
-    ) -> Self:
+    def include(self, *include: Literal["im", "mpim", "private", "public"]) -> Self:
         return self._add_field(
             "include",
-            include,
+            list(include),
             validators=[
                 Typed(str),
                 Strings(self.IM, self.MPIM, self.PRIVATE, self.PUBLIC),
